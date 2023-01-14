@@ -1,1 +1,1 @@
-[https://g-alumi.github.io/simutrans-pakformation/]
+[simutrans-pakformation](https://g-alumi.github.io/simutrans-pakformation/)
