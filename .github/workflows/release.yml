@@ -24,7 +24,9 @@ jobs:
           python-version: 3.8
       
       - name: Create index.html
-        run : python code\main.py ${{ secrets.GITHUB_TOKEN }}
+        run : |
+          cd code
+          python main.py ${{ secrets.GITHUB_TOKEN }}
       
       - name: Commit index.html
         run: |
