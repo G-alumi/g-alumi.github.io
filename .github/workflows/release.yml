@@ -1,0 +1,35 @@
+name: release
+
+on:
+  push:
+    tags:
+      - '*'
+  schedule:
+    # 朝4時(4-9=19時)に定時実行
+    - cron: '0 19 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+    
+      - name: Setup Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+      
+      - name: Create index.html
+        run : python code\main.py ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Commit index.html
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add index.html
+          git commit -m "Botによるコミット"
+          git push origin main
