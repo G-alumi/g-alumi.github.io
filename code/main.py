@@ -58,5 +58,5 @@ if __name__ == "__main__":
 		repos_html += repo_template.format(**replace)
 	
 	res_html = base_html.format(repos=repos_html)
-	with open('index.html', 'w', encoding='UTF-8') as f:
+	with open('../index.html', 'w', encoding='UTF-8') as f:
 		f.write(res_html)
