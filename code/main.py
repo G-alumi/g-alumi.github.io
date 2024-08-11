@@ -15,7 +15,7 @@ if __name__ == "__main__":
 	with open(os.path.join(dirname, 'html', 'index_base.html'), 'r', encoding='UTF-8') as f:
 		base_html = f.read()
 
-	repos :list[Repo] = Repo.getRepos()
+	repos = Repo.getRepos()
 	repos = sorted(repos, key=lambda x: (x.publish_at, x.update_at), reverse=True)
 	repo_template = ''
 	repos_html = ''
