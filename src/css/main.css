@@ -1,0 +1,212 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "IBM Plex Sans JP", sans-serif;
+	box-sizing: border-box;
+	position: relative;
+}
+
+body::-webkit-scrollbar{
+	width: 1.25rem;
+}
+
+body::-webkit-scrollbar-track{
+	background-color: #eee2d3;
+}
+
+body::-webkit-scrollbar-thumb{
+	background-color: #8f7e61;
+	border-radius: 0.5rem;
+	width: 50%;
+}
+header{
+	display: flex;
+	justify-content: space-between;
+	background-color: #a6c3ac;
+	color: #eee2d3;
+	height: 7rem;
+	padding-top: 2rem;
+
+	h1{
+		height: 5rem;
+		font-size: 3rem;
+		vertical-align: bottom;
+		line-height: 5rem;
+		font-weight: 200;
+		span.subtitle{
+			font-weight: 400;
+			padding: 0 1rem;
+			font-size: 1.25rem;
+		}
+	}
+
+	div.menu{
+		display: flex;
+		height: 3rem;
+		padding-right: 1rem;
+		border-left: #eee2d3 solid 1px;
+
+		div{
+			padding: 0 1.5rem;
+			line-height: 1.5rem;
+			border-right: #eee2d3 solid 1px;
+		}
+
+		div:hover{
+			color: #8f7e61;
+		}
+
+	}
+}
+
+h2{
+	font-size: 2.5rem;
+	margin: 3rem 1rem 1rem;
+	font-weight: 300;
+	color: #a6c3ac;
+}
+
+div.addon{
+	margin: 4rem 0;
+
+	div.img_area{
+		width: 100%;
+		background-size: cover;
+		background-position: center;
+
+		div{
+			height: calc(540px + 1.5rem);
+		}
+		
+		div.bg{
+			position: absolute;
+			backdrop-filter: blur(4px);
+			width: 100%;
+			overflow: hidden;
+			background-color: rgba(255, 255, 255, 0.5);
+		}
+
+		div.scroll_wrap{
+			overflow-x: scroll;
+			
+			div.scroll{
+				width: fit-content;
+				padding:0 calc(50% - 480px);
+				display: flex;
+				height: 540px;
+
+					img{
+						display: block;
+						width: 960px;
+						height: auto;
+					}
+			}
+
+		}
+
+	}
+
+	div.scroll_wrap::-webkit-scrollbar{
+		height: 1.5rem;
+	}
+
+	div.scroll_wrap::-webkit-scrollbar-track{
+		background-color: #eaf3d7;
+	}
+
+	div.scroll_wrap::-webkit-scrollbar-thumb{
+		background-color: #a6c3ac;
+		border-radius: 0.5rem;
+	}
+	
+	a.addon_data{
+		text-decoration: none;
+		color: #000000;
+		display: block;
+		display: flex;
+		justify-content: space-between;
+		margin:2rem 20%;
+		padding: 1rem 4rem;
+		border-left: #8f7e61 1px solid;
+		border-right: #8f7e61 1px solid;
+		min-width: 480px;
+		
+		h3{
+			line-height: 3.5rem;
+			height: 3.5rem;
+			font-size: 1.5rem;
+			font-weight: 400;
+		}
+		
+		div.date{
+			div{
+
+				height: 1.75rem;
+				line-height: 1.75rem;
+				font-size: 1rem;
+			}
+
+			div.new::before{
+				content: "公開！";
+				color: #f2a2b9;
+				font-weight: 700;
+			}
+
+			div.update::before{
+				content: "更新！";
+				color: #8bcecb;
+				font-weight: 700;
+			}
+		}
+	}
+
+	a.addon_data:hover{
+		color: #8f7e61;
+	}
+}
+
+hr.addon_separate{
+	margin: 0 auto;
+	width: 75%;
+	min-width: 520px;
+	border: 1px solid #a6c3ac;
+}
+
+div.tool{
+	width: 85%;
+	min-width: 800px;
+	height: 360px;
+	margin: 4rem auto;
+	display: flex;
+	background-color: #eaf3d7;
+	/* color: #8f7e61; */
+	padding: 4rem;
+
+	div.tool_content{
+		flex-grow: 1;
+		padding: 2rem;
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		
+		h3{
+			line-height: 4.5rem;
+			height: 4.5rem;
+			font-size: 1.5rem;
+			font-weight: 400;
+		}
+
+		p{
+			line-height: 2rem;
+			font-size: 1rem;
+		}
+	}
+}
+
+div.tool:nth-child(2n){
+	display: flex;
+	background-color: #eee2d3;
+	/* color: #a6c3ac; */
+	flex-direction: row-reverse;
+}
