@@ -34,7 +34,7 @@ jobs:
         id  : diff
         run : |
           git add index.html
-          git diff --name-only --exit-code
+          git diff --cached --name-only --exit-code
         continue-on-error: true
 
       - name: Commit index.html
