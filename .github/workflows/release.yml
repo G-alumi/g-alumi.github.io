@@ -33,7 +33,7 @@ jobs:
       - name: Diff index.html
         id  : diff
         run : |
-          git add -N index.html
+          git add index.html
           git diff --name-only --exit-code
         continue-on-error: true
 
