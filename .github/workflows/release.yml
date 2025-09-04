@@ -2,45 +2,47 @@ name: release
 
 on:
   push:
-    tags:
-      - '*'
-  schedule:
-    # 朝4時(4-9=19時)に定時実行
-    - cron: '0 19 * * *'
+    branches:
+      - dev
 
 jobs:
   build:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     permissions:
       contents: write
 
     steps:
-      - name: Checkout
+      - name: Checkout dev
         uses: actions/checkout@v4
         with:
-          ref: main
-    
+          fetch-depth: 0
+          ref: dev
+
       - name: Setup Python
         uses: actions/setup-python@v1
         with:
           python-version: 3.8
-      
-      - name: Create index.html
-        run : |
-          cd code
-          python main.py ${{ secrets.GITHUB_TOKEN }}
-      
-      - name: Diff index.html
-        id  : diff
-        run : |
-          git add index.html
-          git diff --cached --name-only --exit-code
-        continue-on-error: true
 
-      - name: Commit index.html
-        run : |
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run main.py
+        run: |
+          python main.py
+
+      - name: Commit generated files to dev
+        run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git commit -m "Botによるコミット"
+          git add .
+          git commit -m "Botによるページ生成" || echo "No changes to commit"
+          git push origin dev
+
+      - name: Merge dev to main
+        run: |
+          git fetch origin main
+          git checkout main
+          git merge dev --no-ff -m "ページ公開"
           git push origin main
-        if  : steps.diff.outcome == 'failure'

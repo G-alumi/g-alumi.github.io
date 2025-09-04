@@ -1,0 +1,48 @@
+div.top{
+	width: 100%;
+	height: 100vh;
+	background:var(--C_MAIN);
+	position: relative;
+
+	img{
+		display: block;
+		height: 100%;
+		position: absolute;
+		right: 0;
+	}
+
+	.top_bar{
+		height: 100%;
+		background: linear-gradient(to right, var(--C_MAIN) 80%, rgba(0,0,0,0));
+		width: 10rem;
+		color: var(--C_SUB);
+
+		h1{
+			writing-mode: vertical-rl;
+			padding: 0.5rem 0;
+		}
+
+		ul{
+			position: absolute;
+			bottom: 8px;
+			width: 7rem;
+			border-bottom: 1px solid var(--C_DARK);
+			margin-left: 0.5rem;
+			padding: 0;
+
+			li{
+				padding: 1rem 0.5rem;
+				border-top: 1px solid var(--C_DARK);
+			}
+
+			li::before{
+				content: none;
+			}
+
+			a, a:hover, a:visited{
+				color: inherit;
+				text-decoration: none;
+			}
+		}
+	}
+}

@@ -1,0 +1,109 @@
+[
+  {
+    "repo": "G-alumi/SimutransPak128Japan-v-Gal_hankyu",
+    "name": "阪急電鉄セット",
+    "description": "阪急新2000/2300系を含む阪急電鉄のアドオン",
+    "thumbnails": [
+      "HK_thumbnail.png"
+    ],
+    "updates": [
+      {
+        "tag": "v5.0.0",
+        "date": "2025-08-21",
+        "description": "- 2000系～5300系・6300系・6330系を追加\n- 9300系更新車を追加\n- (ソースのディレクトリ構造を変更)"
+      }
+    ]
+  },
+  {
+    "repo": "G-alumi/SimutransPak128Japan-v-Gal_kintetsu",
+    "name": "近鉄電車セット",
+    "description": "新しめな近鉄電車のセット",
+    "thumbnails": [
+      "thumbnail.png"
+    ],
+    "updates": [
+      {
+        "tag": "v1.0.0",
+        "date": "2025-08-10",
+        "description": "新しめな通勤車を実装\n- 8A系・1A系を追加\n- 9820系・9020系・5820系・3220系を追加"
+      }
+    ]
+  },
+  {
+    "repo": "G-alumi/SimutransPak128Japan-v-KR-commuter",
+    "name": "도시철도Set(都市鉄道(韓国)セット)",
+    "description": "主にソウル近辺の都市鉄道(首都圏電鉄)のアドオンです。現役車両を中心に実装しており、ある程度自由度のある組成が出来ます。",
+    "thumbnails": [
+      "thumbnail.png",
+      "thumbnail_update.png"
+    ],
+    "updates": [
+      {
+        "tag": "v2.3.0",
+        "date": "2025-05-31",
+        "description": "新規追加\n\n- 393000系を追加しました\n\n修正\n\n- チュドゥンイの一部の最後尾車両の前照灯が点灯していたため尾灯点灯に修正しました。\n- 4両・2両の車両を中心に導入年の設定が正しくされていなかったのを修正しました。"
+      }
+    ]
+  },
+  {
+    "repo": "G-alumi/SimutransPak128Japan-v-Gal_tobu",
+    "name": "東武鉄道セット",
+    "description": "自分が作った東武電車まとめ的なセットです。あんまり脈絡はないですが、強いて言えば新しいもの中心。",
+    "thumbnails": [
+      "thumbnail_tobu.png"
+    ],
+    "updates": [
+      {
+        "tag": "v1.1",
+        "date": "2025-04-01",
+        "description": "\n- 80000系みまモニ(サハ83504)を追加"
+      }
+    ]
+  },
+  {
+    "repo": "G-alumi/SimutransPak128Japan-v-JRS-DC",
+    "name": "JR四国 一般気動車・ハイブリッド車セット",
+    "description": "JR四国の1000・1200・1500形気動車・新型ハイブリッド車のアドオンです。",
+    "thumbnails": [
+      "thumbnail.png"
+    ],
+    "updates": [
+      {
+        "tag": "v1.0",
+        "date": "2025-02-13",
+        "description": "リリース"
+      }
+    ]
+  },
+  {
+    "repo": "G-alumi/SimutransPak128Japan-v-Gal_OsakaMetro",
+    "name": "大阪メトロ新20/400系セット",
+    "description": "大阪メトロの最新型・400系と広く活躍している新20系のアドオンでです。",
+    "thumbnails": [
+      "thumbnail.png"
+    ],
+    "updates": [
+      {
+        "tag": "v2.0.0",
+        "date": "2024-01-22",
+        "description": "今まで400系単独で公開していたものに新20系を追加しました。"
+      }
+    ]
+  },
+  {
+    "repo": "G-alumi/SimutransPak128Japan-v-Gal_sanyo",
+    "name": "山陽電鉄セット",
+    "description": "3000系・5000系のアドオンです。",
+    "thumbnails": [
+      "thumbnail_sanyo3000.png",
+      "thumbnail_sanyo5000.png"
+    ],
+    "updates": [
+      {
+        "tag": "v3.0.0",
+        "date": "2023-10-03",
+        "description": "5000系リニューアル車を追加"
+      }
+    ]
+  }
+]

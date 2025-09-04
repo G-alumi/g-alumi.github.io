@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet" href="src/css/main.css">
+	<link rel="stylesheet" href="src/css/index.css">
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@200;300;400;700&display=swap" rel="stylesheet">
+	<title>G-alumi.github.io</title>
+</head>
+<body>
+	<div class="top">
+		{%- for img in header_img %}
+		<img src="src/img/header/{{ img }}" alt="" style="display: none;">
+		{%- endfor %}
+		<div class="top_bar">
+			<h1>
+				G-alumi.github.io
+			</h1>
+			<ul>
+				<a href="./simutrans_addons.html">
+					<li>simutrans<br>addons</li>
+				</a>
+				<li>simutrans<br>tools</li>
+			</ul>
+		</div>
+	</div>
+	<header>
+		<div class="title-wrap">
+			<a href="./">
+				<h1>G-alumi.github.io<span class="subtitle">githubで公開しているもの一覧</span></h1>
+			</a>
+		</div>
+		<ul class="menu">
+			<a href="./simutrans_addons.html"><li>simutrans<br>addons</li></a>
+			<li>simutrans<br>tools</li>
+		</ul>
+	</header>
+	<div class="main">
+		<h2>このサイトにあるもの</h2>
+		<h3>simutrans addons</h3>
+		<p>公開中のアドオン一覧</p>
+		<section class="list">
+			<h5>更新情報</h5>
+			<ul>
+				{%- for update in updates %}
+				<li><a href="{{ update.repo }}">{{ update.date }} {{ update.name }} {{ update.version }}</a></li>
+				{%- endfor %}
+			</ul>
+		</section>
+		<h3>simutrans tools</h3>
+		<p>公開中のツール一覧（まだつくってない）</p>
+		<h2>私について</h2>
+		<p>
+			アルミ + 緑で『あるみどり』です。当時は6000系を意識してHNを作りましたが、16000系も(椅子以外は)好きなので千代田線由来のHNってことにしておいてください。
+		</p>
+		<p>
+			阪急とか東武のほうが撮ってる気はするけど小田急沿線のオタク、KORAILとかも好きです。<br>
+			ここ数年(2020～)はSimutrans Pak128.japanでアドオンを作ってるのがメインの活動になっていますが、撮り・駅メモ埋めなど外に出るのも嫌いではないです。<br>
+		</p>
+		<p>
+			好きな電車など<br>
+			小田急1000・2000・4000・5000形 LSE・VSE(というか小田急車は全部好き) /東京メトロ全般 /東急5000系列 /阪急8000・8300系(1次車)・5300系 /名鉄4000系 /800系新幹線 /KTX-EUM
+		</p>
+		<p>
+			触れてるアニメ・コンテンツ・ゲーム<br>
+			デレマス(スターライトステージ・担当：神崎蘭子) /MyGO!!!!!(アニメ・ライブは24年夏から) /プロセカ(💻) /プリンセス・プリンシパル /ステーションメモリーズ(5000駅弱) /神椿市建設中 /三者三葉 /モンスターハンター /クラッシュバンディクー /World of Tanks(本家/Blitz) /minecraft<br>
+			モンスターハンターは4・4Gから始めて、XXまでそこそこやって・Rise(SB)はさらっと触れただけ、Wildsで復帰したチャージアックス使いです。
+		</p>
+		<p>
+			聴いてる音楽<br>
+			MyGO!!!!! /デレマスは神崎蘭子とかCo曲とか　全体曲とかいう概念を知ってそういう曲が好きになったコンテンツかも /明透 /ヰ世界情緒 /V.W.P /25時、ナイトコードで。 /サカナクション<span style="color: #ffffff;"> /ツユ(いつオトくらいから聴いてた)</span>
+		</p>
+	</div>
+	<script>
+		let top_imgs = document.querySelectorAll(".top img")
+		top_imgs[Math.floor(Math.random() * top_imgs.length)].setAttribute("style", "display:block");
+		
+		document.addEventListener("scroll", scroll_top())
+
+		function scroll_top(){
+			let top_height = document.querySelector(".top").offsetHeight
+			let last_Y = 0
+			let is_body = false
+
+			let begin = () => {
+				if(window.scrollY <= top_height){
+					// スクロール位置がトップ内の場合、スクロール方向によってトップの上部か下部に吸着
+					// console.log("トップ内の制御", window.scrollY, scroll_Y, scroll_Y > window.scrollY)
+					last_Y = last_Y > window.scrollY ? 0 : top_height
+					window.scrollTo({top:last_Y, behavior: "smooth"})
+				} else {
+					is_body = true
+				}
+			}
+
+			let end = () => {
+				if(is_body && window.scrollY < top_height){
+					// 前回位置がトップより下 & 現在位置がトップ内
+					window.scrollTo({top:top_height, behavior: "smooth"})
+					is_body = false
+				}
+			}
+
+			let evt = debounce(begin, end)
+			return () => {
+				top_height = document.querySelector(".top").offsetHeight
+				evt()
+				last_Y = window.scrollY
+			}
+		}
+
+		/**
+		 * @param {Function} fun_begin
+		 * @param {Function} fun_end
+		 * @param {number} [interval=150] 
+		 * @return {Function}
+		*/
+		function debounce(fun_begin, fun_end, interval = 100){
+			let timer
+			return function(){
+				if (!timer){
+					fun_begin()
+				}
+				clearTimeout(timer)
+				timer = setTimeout(() => {
+					fun_end()
+					timer = undefined
+				}, interval)
+			}
+		}
+	</script>
+</body>
+</html>
