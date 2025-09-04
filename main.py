@@ -15,23 +15,24 @@ if __name__ == "__main__":
 		repos = Repo.generate(json.load(f))
 
 		releases_dir = "./data/releases"
-		for release_name in os.listdir(releases_dir):
-			json_path = os.path.join(releases_dir, release_name)
-			with open(os.path.join(releases_dir, release_name), encoding="utf8") as f2:
-				release = Repo(json.load(f2))
-				for i, repo in enumerate(repos):
-					if repo.name == release.name:
-						for j, update in enumerate(repo.updates):
-							if update.tag != release.updates[0].tag and update.date + datetime.timedelta(days=365) >= datetime.date.today():
-								release.updates.append(update)
-						repos[i] = release
-					else:
-						for j, update in enumerate(repo.updates):
-							if j != 0 and update.date + datetime.timedelta(days=365) < datetime.date.today():
-								del repo.updates[j]
+		if os.path.isdir(releases_dir):
+			for release_name in os.listdir(releases_dir):
+				json_path = os.path.join(releases_dir, release_name)
+				with open(os.path.join(releases_dir, release_name), encoding="utf8") as f2:
+					release = Repo(json.load(f2))
+					for i, repo in enumerate(repos):
+						if repo.name == release.name:
+							for j, update in enumerate(repo.updates):
+								if update.tag != release.updates[0].tag and update.date + datetime.timedelta(days=365) >= datetime.date.today():
+									release.updates.append(update)
+							repos[i] = release
+						else:
+							for j, update in enumerate(repo.updates):
+								if j != 0 and update.date + datetime.timedelta(days=365) < datetime.date.today():
+									del repo.updates[j]
 
-						repo.updates.sort(key=lambda x:x.date, reverse=True)
-			os.remove(json_path)
+							repo.updates.sort(key=lambda x:x.date, reverse=True)
+				os.remove(json_path)
 		repos.sort(key=lambda x:x.updates[0].date, reverse=True)
 
 	with open(repos_json, "w", encoding="utf8") as f:
