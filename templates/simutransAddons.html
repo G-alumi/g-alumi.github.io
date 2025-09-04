@@ -1,0 +1,35 @@
+{%- extends "main.html" %}
+{%- block content %}
+	<div class="main">
+		<h2>simutrans addons</h2>
+		{%- for addon in addons %}
+		<article>
+			<div class="thumbnail">
+				<a href="{{ addon.getUrl() }}"><img src="{{ addon.getThumbnailsUrl() }}" alt="サムネイル画像"></a>
+			</div>
+			<div class="detail">
+				<h3>{{ addon.name }}</h3>
+				{%- filter add_indent %}
+				{{ addon.description | markdown }}
+				{%- endfilter %}
+				<p>
+					<a href="{{ addon.getRelease() }}">ダウンロード</a><br>
+					<a href="{{ addon.getUrl() }}">Readme/リポジトリ</a>
+				</p>
+				<section>
+					<h4>更新情報</h4>
+					{%- for update in addon.updates %}
+					<h5 class="justify">
+						<div>{{ update.tag }}</div>
+						<div>{{ update.date }}</div>
+					</h5>
+					{%- filter add_indent %}
+					{{ update.description | markdown }}
+					{%- endfilter %}
+					{%- endfor %}
+				</section>
+			</div>
+		</article>
+		{%- endfor %}
+	</div>
+{% endblock content %}
