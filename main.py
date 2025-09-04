@@ -6,12 +6,12 @@ from classes.Repo import Repo
 import json
 import os
 import datetime
-from pprint import pprint
 
 if __name__ == "__main__":
 
 	repos: list[Repo] = []
-	with open(r'data\repositories.json', encoding="utf8") as f:
+	repos_json = "./data/repositories.json"
+	with open(repos_json, encoding="utf8") as f:
 		repos = Repo.generate(json.load(f))
 
 		releases_dir = "./data/releases"
@@ -34,7 +34,7 @@ if __name__ == "__main__":
 			os.remove(json_path)
 		repos.sort(key=lambda x:x.updates[0].date, reverse=True)
 
-	with open(r'data\repositories.json', "w", encoding="utf8") as f:
+	with open(repos_json, "w", encoding="utf8") as f:
 		json.dump([r.getDict() for r in repos], f, indent=2, ensure_ascii=False)
 
 
