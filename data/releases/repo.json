@@ -1,0 +1,15 @@
+{
+  "repo": "G-alumi/SimutransPak128Japan-v-Gal_kintetsu",
+  "name": "近鉄電車セット",
+  "description": "8A系・シリーズ21等の新しめな近鉄電車のセットです。",
+  "thumbnails": [
+    "thumbnail.png"
+  ],
+  "updates": [
+    {
+      "tag": "v1.0.1",
+      "description": "- 8A系・1A系のトイレ位置を修正・向きによって白帯の太さが違ったのを修正",
+      "date": "2025-09-18"
+    }
+  ]
+}
