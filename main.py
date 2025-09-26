@@ -33,7 +33,7 @@ if __name__ == "__main__":
 		with open(RELEASE_FILE, encoding="utf8") as f:
 			load_release:dict[str,str] = json.load(f)
 			
-		# shutil.rmtree(WORK_DIR)
+		shutil.rmtree(WORK_DIR)
 		isExists = False
 		for repo in repos:
 			updates: list[Repo.Update] = []
@@ -87,7 +87,7 @@ if __name__ == "__main__":
 				}],
 			})
 			repos.append(repo)
-			
+
 		repos.sort(key=lambda x:x.updates[0].date, reverse=True)
 
 	with open(repos_json, "w", encoding="utf8") as f:
