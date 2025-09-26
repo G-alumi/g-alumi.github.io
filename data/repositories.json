@@ -1,5 +1,25 @@
 [
   {
+    "repo": "G-alumi/SimutransPak128Japan-v-Gal_kintetsu",
+    "name": "近鉄電車セット",
+    "description": "8A系・シリーズ21等の新しめな近鉄電車のセットです。",
+    "thumbnails": [
+      "thumbnail.png"
+    ],
+    "updates": [
+      {
+        "tag": "v1.0.1",
+        "date": "2025-09-18",
+        "description": "- 8A系・1A系のトイレ位置を修正・向きによって白帯の太さが違ったのを修正"
+      },
+      {
+        "tag": "v1.0.0",
+        "date": "2025-08-10",
+        "description": "新しめな通勤車を実装\n- 8A系・1A系を追加\n- 9820系・9020系・5820系・3220系を追加"
+      }
+    ]
+  },
+  {
     "repo": "G-alumi/SimutransPak128Japan-v-Gal_hankyu",
     "name": "阪急電鉄セット",
     "description": "阪急新2000/2300系を含む阪急電鉄のアドオン",
@@ -11,21 +31,6 @@
         "tag": "v5.0.0",
         "date": "2025-08-21",
         "description": "- 2000系～5300系・6300系・6330系を追加\n- 9300系更新車を追加\n- (ソースのディレクトリ構造を変更)"
-      }
-    ]
-  },
-  {
-    "repo": "G-alumi/SimutransPak128Japan-v-Gal_kintetsu",
-    "name": "近鉄電車セット",
-    "description": "新しめな近鉄電車のセット",
-    "thumbnails": [
-      "thumbnail.png"
-    ],
-    "updates": [
-      {
-        "tag": "v1.0.0",
-        "date": "2025-08-10",
-        "description": "新しめな通勤車を実装\n- 8A系・1A系を追加\n- 9820系・9020系・5820系・3220系を追加"
       }
     ]
   },
