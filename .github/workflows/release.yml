@@ -17,6 +17,9 @@ jobs:
       contents: write
 
     steps:
+      - name: Install GitHub CLI
+        run: sudo apt-get install gh -y
+
       - name: Checkout dev
         uses: actions/checkout@v4
         with:
@@ -35,6 +38,7 @@ jobs:
           mkdir -p ${{ env.WORK_DIR }}
           gh repo view ${{ env.REPO }} --json name,nameWithOwner,description > ${{ env.WORK_DIR }}repo.json
           gh release view -R ${{ env.REPO }} --json tagName,body > ${{ env.WORK_DIR }}release.json
+          gh api -H "Accept: application/vnd.github.raw" repos/G-alumi/SimutransPak128Japan-v-Gal_hanshin/contents/.github/REPO.json > .${{ env.WORK_DIR }}repo2.json
 
       - name: Run main.py
         run: |
