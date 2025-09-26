@@ -6,6 +6,8 @@ from classes.Repo import Repo
 import json
 import os
 import datetime
+import re
+import shutil
 
 if __name__ == "__main__":
 
@@ -14,25 +16,78 @@ if __name__ == "__main__":
 	with open(repos_json, encoding="utf8") as f:
 		repos = Repo.generate(json.load(f))
 
-		releases_dir = "./data/releases"
-		if os.path.isdir(releases_dir):
-			for release_name in os.listdir(releases_dir):
-				json_path = os.path.join(releases_dir, release_name)
-				with open(os.path.join(releases_dir, release_name), encoding="utf8") as f2:
-					release = Repo(json.load(f2))
-					for i, repo in enumerate(repos):
-						if repo.name == release.name:
-							for j, update in enumerate(repo.updates):
-								if update.tag != release.updates[0].tag and update.date + datetime.timedelta(days=365) >= datetime.date.today():
-									release.updates.append(update)
-							repos[i] = release
-						else:
-							for j, update in enumerate(repo.updates):
-								if j != 0 and update.date + datetime.timedelta(days=365) < datetime.date.today():
-									del repo.updates[j]
+	WORK_DIR = "./data/work"
+	REPO_FILE = os.path.join(WORK_DIR, "repo.json")
+	REPO2_FILE = os.path.join(WORK_DIR, "repo2.json")
+	RELEASE_FILE = os.path.join(WORK_DIR, "release.json")
+	if os.path.exists(REPO_FILE) and os.path.exists(RELEASE_FILE) and os.path.exists(REPO2_FILE):
+		load_repo = None
+		load_repo2 = None
+		load_release = None
+		with open(REPO_FILE, encoding="utf8") as f:
+			load_repo:dict[str,str] = json.load(f)
 
-							repo.updates.sort(key=lambda x:x.date, reverse=True)
-				os.remove(json_path)
+		with open(REPO2_FILE, encoding="utf8") as f:
+			load_repo2:dict[str,str] = json.load(f)
+		
+		with open(RELEASE_FILE, encoding="utf8") as f:
+			load_release:dict[str,str] = json.load(f)
+			
+		# shutil.rmtree(WORK_DIR)
+		isExists = False
+		for repo in repos:
+			updates: list[Repo.Update] = []
+			if repo.repo == load_repo["nameWithOwner"]:
+				isExists = True
+				release_description = ""
+				release_description_lines = load_release["body"].strip().splitlines()
+				for line in release_description_lines:
+					if not ("詳しくは" in line and "readme" in line.lower()) :
+						release_description += line
+						release_description += "\n"
+
+				updates.append(Repo.Update({
+					"tag":  		load_release["tagName"],
+					"date":  		datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).strftime("%Y-%m-%d"),
+					"description":  release_description,
+				}))
+
+				repo.name = re.sub('\(.*?\)$', '', load_repo["description"].strip()).strip()
+				repo.description = load_repo2["description"].strip()
+				
+			for upd_i, update in enumerate(repo.updates):
+				# !(更新のrepo & 更新のタグ) | 最新の更新 | 1年以内の更新
+				if (
+					not(repo.name == load_repo["nameWithOwner"]and update.tag == load_release["tagName"]) or
+					upd_i == 0 or
+					update.date + datetime.timedelta(days=365) >= datetime.date.today()
+				):
+					updates.append(update)
+
+			updates.sort(key=lambda x:x.date, reverse=True)
+			repo.updates = updates
+		
+		if not isExists:
+			release_description = ""
+			release_description_lines = load_release["body"].strip().splitlines()
+			for line in release_description_lines:
+				if not ("詳しくは" in line and "readme" in line.lower()) :
+					release_description += line
+					release_description += "\n"
+
+			repo = Repo({
+				"repo": load_repo["nameWithOwner"],
+				"name": re.sub('\(.*?\)$', '', load_repo["description"].strip()).strip(),
+				"description": load_repo2["description"],
+				"thumbnails": load_repo2["thumbnails"],
+				"updates": [{
+					"tag":  		load_release["tagName"],
+					"date":  		datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).strftime("%Y-%m-%d"),
+					"description":  release_description,
+				}],
+			})
+			repos.append(repo)
+			
 		repos.sort(key=lambda x:x.updates[0].date, reverse=True)
 
 	with open(repos_json, "w", encoding="utf8") as f:

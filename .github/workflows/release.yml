@@ -1,13 +1,17 @@
 name: release
 
 on:
-  push:
-    branches:
-      - dev
+  repository_dispatch:
+    types:
+      - update_repo
+
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  WORK_DIR: ./data/work/
+  REPO:      ${{ github.event.client_payload.repo }}
 
 jobs:
   build:
-    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -25,6 +29,12 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
+
+      - name: Get repository date
+        run: |
+          mkdir -p ${{ env.WORK_DIR }}
+          gh repo view ${{ env.REPO }} --json name,nameWithOwner,description > ${{ env.WORK_DIR }}repo.json
+          gh release view -R ${{ env.REPO }} --json tagName,body > ${{ env.WORK_DIR }}release.json
 
       - name: Run main.py
         run: |
